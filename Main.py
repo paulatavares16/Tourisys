@@ -3,10 +3,15 @@ from poi.OverlayData import *
 from poi.GMapsData import *
 from recsys.RecSys import *
 
+# Instância da classe do Nominatim
 nominatim = Nominatim();
+# Query para localidade de Salvador
 nominatim.query("Salvador,Bahia,Brazil")
+# Determinação de id da área buscada
 areaIdSalvador = nominatim.areaId()
 
+# Instancia da classe na qual é possível utilizar OverlayPass 
+# chamando emsenguida metodo que da origem a lista de poi's com o id da area solicitada
 overlayData = OverlayData()
 overlayData.poiData(areaIdSalvador)
 
