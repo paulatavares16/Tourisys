@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# Python Wrapper para acesso ao Overpass aPI
 import overpy
 
 

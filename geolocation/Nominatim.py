@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import urllib
 import json
 
@@ -6,12 +7,14 @@ class Nominatim:
     def __init__(self):
         self._json = None
     
-    # Método query que retorna resposta da consulta ao OpenStretMaps de uma determinada localidade
+    # Método que retorna resposta de uma consulta ao OpenStretMaps para uma determinada localidade
     def query(self, query, endpoint = "https://nominatim.openstreetmap.org/search?format=json&q="):
-        response = urllib.urlopen(endpoint + urllib.quote_plus(query, safe=''))
+        response = urllib.urlopen(endpoint + urllib.quote_plus(query, safe='')) # 'quote_plus' substitui espaços por +
         self._json = json.load(response)
 
+
     # Método que retorna um id para a área buscada baseada baseado no id retornado pelo OSM
+    # Para achar o ID da relation do Overpass - API OSM - é necessário realizar a soma abaixo
     def areaId(self):
         for d in self._json:
             if 'osm_type' in d and d['osm_type'] == 'relation' and 'osm_id' in d:

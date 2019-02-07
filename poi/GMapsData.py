@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import googlemaps
 import urlparse
 import io
@@ -20,10 +22,12 @@ class GMapsData:
         return None
 
     def _reviews(self, placeId, poi):
+        # Busca por detalhes - onde estão os reviews
         placeDetail = self._gmaps.place(placeId)
         result = placeDetail['result']
         if 'reviews' in result:
             reviews = result['reviews']
+            # Lista de reviews com url do autor
             gen = (review for review in reviews if 'author_url' in review)
 
             i = {}
@@ -34,6 +38,7 @@ class GMapsData:
             i['longitude'] = poi['longitude']
             self._poi.append(i)
 
+            # Lista com informações do review
             for review in gen:
                 r = {}
                 # user_id
@@ -48,6 +53,7 @@ class GMapsData:
                 u['name'] = review['author_name']
                 self._user.append(u)
 
+    # Para cada ponto de interesse chama founçã que retorna os reviews
     def data(self, listPoi):
         for poi in listPoi:
             placeId = self._placeId(poi)

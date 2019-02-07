@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+# GraphLab - framework for machine learning
 import graphlab as gl
 from routes.Route import *
 
@@ -34,20 +37,28 @@ class RecSys:
         print(recs)
 
         if eval:
+            # Executa o treinamento e teste com os grupos previamente criados
             isrTrain = gl.item_similarity_recommender.create(self._train, target='rating', similarity_type=similarityType)
+            # Retorna o precision e o recall
             evalPrecisionRecall = isrTrain.evaluate_precision_recall(self._test)
+            # Avaliação do erro Root Mean Square Error
             evalRMSE = isrTrain.evaluate_rmse(self._test, target='rating')
             eval = isrTrain.evaluate(self._test)
             print(eval)
 
+        # Recomendação feita baseada em item
         if similarItem:
             similarity = isr.get_similar_items(similarItem).join(self._items, on={'similar': 'item_id'}).sort('rank')
             print(similarity)
 
+        # Escreve as rotas para serem utilizadas no web
         if newUsers and newObservationData:
             route = Route(recs['latitude'], recs['longitude'])
             route.map()
 
+    # Metodo - acima - que realiza diferentes operacoes, poderia ser 3 metodos
+
+    # Recomendação baseada em conteudo
     def itemContent(self, attributes='', splitAttribute='', newUsers=None, newObservationData=None, eval=False, similarItem=None):
         newItems = self._items.copy()
         if attributes:
@@ -73,6 +84,7 @@ class RecSys:
             route = Route(recs['latitude'], recs['longitude'])
             route.map()
 
+    # Se o item tiver o atributo especificado multivalorado, o item será duplicado
     def _splitAttribute(self, items, attribute):
         removeItems = []
         for item in items:
