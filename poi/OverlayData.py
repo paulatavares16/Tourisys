@@ -58,6 +58,7 @@ class OverlayData:
                         d['type'].append(category)
 
     def poiData(self, areaId):
+        print 'Querys do OverPass'
         # API de consulta que retorna data do OSM, de acordo com a query construida
         api = overpy.Overpass()
 

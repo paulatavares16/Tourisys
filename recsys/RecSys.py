@@ -34,6 +34,7 @@ class RecSys:
         print(self._ratings.dtype())
         isr = gl.item_similarity_recommender.create(self._ratings, target='rating', similarity_type=similarityType)
         recs = isr.recommend(users=newUsers, new_observation_data=newObservationData).join(self._items, on='item_id').sort('rank')
+        print 'Recomendacoes por similaridade com base completa'
         print(recs)
 
         if eval:
@@ -44,11 +45,17 @@ class RecSys:
             # Avaliação do erro Root Mean Square Error
             evalRMSE = isrTrain.evaluate_rmse(self._test, target='rating')
             eval = isrTrain.evaluate(self._test)
+            print 'Avaliacao com grupos train e test'
             print(eval)
+            print 'Valores de Precision e Recal'
+            print(evalPrecisionRecall)
+            print 'RMSE'
+            print(evalRMSE)
 
         # Recomendação feita baseada em item
         if similarItem:
             similarity = isr.get_similar_items(similarItem).join(self._items, on={'similar': 'item_id'}).sort('rank')
+            print 'Recomendacoes por item'
             print(similarity)
 
         # Escreve as rotas para serem utilizadas no web
@@ -67,10 +74,12 @@ class RecSys:
             newItems = self._splitAttribute(newItems, splitAttribute)
         icr = gl.item_content_recommender.create(newItems, 'item_id', self._ratings, 'user_id', target='rating')
         recs = icr.recommend(users=newUsers, new_observation_data=newObservationData).join(self._items, on='item_id').sort('rank')
+        print 'Recomendacoes por conteudo com base completa'
         print(recs)
 
         if similarItem:
             similarity = icr.get_similar_items(similarItem).join(self._items, on={'similar': 'item_id'}).sort('rank')
+            print 'Recomendacoes por item'
             print(similarity)
 
         if eval:
@@ -78,7 +87,12 @@ class RecSys:
             evalPrecisionRecall = icrTrain.evaluate_precision_recall(self._test)
             evalRMSE = icrTrain.evaluate_rmse(self._test, target='rating')
             eval = icrTrain.evaluate(self._test)
+            print 'Avaliacao com grupos train e test'
             print(eval)
+            print 'Valores de Precision e Recal'
+            print(evalPrecisionRecall)
+            print 'RMSE'
+            print(evalRMSE)
 
         if newUsers and newObservationData:
             route = Route(recs['latitude'], recs['longitude'])
