@@ -4,9 +4,10 @@ import googlemaps
 import urlparse
 import io
 import json
+from config import google_api_key
 
 class GMapsData:
-    _key = 'AIzaSyA0Yst-qoirbQMooKig-qHPRTA2SCMiuFc'
+    _key = google_api_key
     _gmaps = googlemaps.Client(_key)
 
     def __init__(self):
