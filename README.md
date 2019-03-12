@@ -13,7 +13,7 @@ GraphLab-Create-License==2.1
 
 To install GraphLab follow the instructions [here](https://turi.com/download/install-graphlab-create-command-line.html). Option 2 for virtualenv instalation.
 
-Intalling others dependences on virtualenv:
+Installing others dependences on virtualenv:
 
 ```
 pip install -r requirements.txt
