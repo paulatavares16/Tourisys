@@ -6,7 +6,7 @@ import io
 import json
 
 class GMapsData:
-    _key = 'AIzaSyA0Yst-qoirbQMooKig-qHPRTA2SCMiuFc'
+    _key = 'KEY'
     _gmaps = googlemaps.Client(_key)
 
     def __init__(self):
