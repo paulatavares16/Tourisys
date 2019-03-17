@@ -24,7 +24,7 @@ recent_data['user_id'] = ['99999']
 recent_data['item_id'] = [59392558]
 recent_data['rating'] = [0.8]
 recSys.itemSimilarity(similarityType='pearson', newUsers=[99999], newObservationData=recent_data)
-recSys.itemContent(newUsers=[99999], newObservationData=recent_data)
+# recSys.itemContent(newUsers=[99999], newObservationData=recent_data)
 
 ## Get similar items
 recSys.itemSimilarity(similarityType='pearson', similarItem=[59224731])
