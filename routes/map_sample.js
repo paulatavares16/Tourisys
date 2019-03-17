@@ -50,7 +50,7 @@ function calculateAndDisplayRoute(
 // Formata wayPoints gerados via recomendacao
 function getLatLng() {
   var list = [];
-  waypoints.forEach(function(element) {
+  window.waypoints.forEach(function(element) {
     loc = { location: new google.maps.LatLng(element.lat, element.lng) };
     list.push(loc);
   });
