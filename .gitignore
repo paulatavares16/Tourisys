@@ -1,4 +1,5 @@
 tourisys
-data
+tourisys_env
+data/
 *.pyc
 routes/route.html
