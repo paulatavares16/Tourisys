@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta charset="utf-8" />
-    <title>Travel modes in directions</title>
+    <title>Tourisys</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -44,6 +44,10 @@
       </select>
     </div>
     <div id="map"></div>
+    <div id="map2"></div>
+    <script>
+      window.conf_origin = {{ conf_origin | tojson }};
+    </script>
     <script src="location.js"></script>
     <script src="map_sample.js"></script>
   </body>

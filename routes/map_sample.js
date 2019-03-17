@@ -31,13 +31,11 @@ function calculateAndDisplayRoute(
   // chamada API de rota
   directionsService.route(
     {
-      origin: { lat: -12.9691679, lng: -38.5106662 },
-      destination: { lat: -12.9725135, lng: -38.5090783 },
+      origin: window.conf_origin,
+      destination: { lat: -13.00792144, lng: -38.51707822 },
       waypoints: latLngWaypoints,
-      // Note that Javascript allows us to access the constant
-      // using square brackets and a string value as its
-      // "property."
-      travelMode: google.maps.TravelMode[selectedMode]
+      travelMode: google.maps.TravelMode[selectedMode],
+      optimizeWaypoints: true,
     },
     function(response, status) {
       if (status == "OK") {

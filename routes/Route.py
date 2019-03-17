@@ -2,7 +2,7 @@ import io
 import webbrowser
 import os
 from jinja2 import FileSystemLoader, Environment, select_autoescape
-from config import google_api_key
+from config import google_api_key, user_location
 
 class Route:
     def __init__(self, latitudes, longitudes):
@@ -28,6 +28,6 @@ class Route:
             location_file.write(unicode(self._waypoints()))
 
         with io.open('routes/route.html', 'w', encoding='utf8') as route_file:
-            route_file.write(template.render(mapsUrl=mapsUrl))
+            route_file.write(template.render(mapsUrl=mapsUrl, conf_origin=user_location))
         
         webbrowser.open('file://' + os.path.realpath('routes/route.html'))
