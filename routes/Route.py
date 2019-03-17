@@ -27,7 +27,7 @@ class Route:
         with io.open('routes/location.js', 'w', encoding='utf8') as location_file:
             location_file.write(unicode(self._waypoints()))
 
-        with io.open('routes/route.html', 'a', encoding='utf8') as route_file:
+        with io.open('routes/route.html', 'w', encoding='utf8') as route_file:
             route_file.write(template.render(mapsUrl=mapsUrl))
         
         webbrowser.open('file://' + os.path.realpath('routes/route.html'))
