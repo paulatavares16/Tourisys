@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
+    <title>Tourisys</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+      }
+    </style>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG24dCqsMbLamfZxI5IyBnclDuKrwcctM&callback=initMap"></script>
+  </head>
+  <body>
+    <div id="floating-panel">
+      <b>Mode of Travel: </b>
+      <select id="mode">
+        <option value="DRIVING">Driving</option>
+        <option value="WALKING">Walking</option>
+        <option value="BICYCLING">Bicycling</option>
+        <option value="TRANSIT">Transit</option>
+      </select>
+    </div>
+    <div id="map"></div>
+    <div id="map2"></div>
+    <script>
+      window.conf_origin = {"lat": -13.00943906, "lng": -38.51449502};
+      window.waypoints = [{"lat": -12.9950602, "lng": -38.5276959}, {"lat": -13.0103339, "lng": -38.5329129}, {"lat": -13.0108297, "lng": -38.4919527}, {"lat": -13.00441, "lng": -38.5307439}]
+    </script>
+    <script src="map_sample.js"></script>
+  </body>
+</html>
