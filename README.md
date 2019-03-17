@@ -24,5 +24,5 @@ pip install -r requirements.txt
 Instructions:
 
 - In [config.py](config.py) add your Google API Key
-- In [Main.py](Main.py), setting your query (place to search poins of interest in the region that you choose);
-- Choose type of recommender (ItemSimilary or ItemContent and your attributes).
+- In [get_data.py](get_data.py), setting your query (place to search poins of interest in the region that you choose);
+- In [gen_recomen.py](gen_recomen.py), Choose type of recommender (ItemSimilary or ItemContent and your attributes).
