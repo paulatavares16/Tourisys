@@ -72,7 +72,12 @@ class OverlayData:
                         'area({})->.searchArea;' \
                         'node(area.searchArea);' \
                         'node._["name"]{};(._;>;);out center;'.format(self._timeout, areaId, category['selector']);
-            result = api.query(query)
+            try:
+                result = api.query(query)
+            except:
+                print'Entrou na exceção1'
+                time.sleep(1)
+                result = api.query(query)                
             elements.extend(result.nodes)
 
             # Query referente a todos os caminhos que contém um nó na bounding box ou que a crusa
@@ -80,7 +85,12 @@ class OverlayData:
                     'area({})->.searchArea;' \
                     'way(area.searchArea);' \
                     'way._["name"]{};(._;>;);out center;'.format(self._timeout, areaId, category['selector']);
-            result = api.query(query)
+            try:
+                result = api.query(query)
+            except:
+                print'Entrou na exceção2'
+                time.sleep(1)
+                result = api.query(query)  
             elements.extend(result.ways)
             
             # Query referente a todos as relações da bounding box delimitada
@@ -88,6 +98,12 @@ class OverlayData:
                     'area({})->.searchArea;' \
                     'rel(area.searchArea);' \
                     'rel._["name"]{};(._;>;);out center;'.format(self._timeout, areaId, category['selector']);
-            result = api.query(query)
+            try:
+                result = api.query(query)
+            except:
+                print'Entrou na exceção3'
+                time.sleep(1)
+                result = api.query(query)  
             elements.extend(result.relations)
+            print('Esse foi:'+ category['selector'])
             self._saveInfo(elements, category['type'])
