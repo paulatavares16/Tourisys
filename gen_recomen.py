@@ -15,15 +15,15 @@ recSys.itemSimilarity(eval=True)
 # recSys.itemContent(attributes=['item_id', 'name'], eval=True)
 # recSys.itemContent(attributes=['item_id', 'name', 'category'], splitAttribute='category', eval=True)
 # recSys.itemContent(attributes=['item_id', 'name', 'category'], eval=True)
-recSys.itemContent(splitAttribute='category', eval=True)
-recSys.itemContent(eval=True)
+# recSys.itemContent(splitAttribute='category', eval=True)
+# recSys.itemContent(eval=True)
 
 ## Recommends for new users
-recent_data = gl.SFrame();
-recent_data['user_id'] = ['99999']
+recent_data = gl.SFrame()
+recent_data['user_id'] = ['108096371283696583542']
 recent_data['item_id'] = [59392558]
 recent_data['rating'] = [0.8]
-recSys.itemSimilarity(similarityType='pearson', newUsers=[99999], newObservationData=recent_data)
+recSys.itemSimilarity(similarityType='pearson', newUsers=[108096371283696583542], newObservationData=recent_data)
 # recSys.itemContent(newUsers=[99999], newObservationData=recent_data)
 
 ## Get similar items
