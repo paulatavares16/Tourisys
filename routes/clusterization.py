@@ -13,11 +13,11 @@ def clusterization_list():
 
     kmeans = KMeans(n_clusters=3, random_state=0).fit(dataset)
     X_clustered = kmeans.fit_predict(dataset)
-    # plot_results(X_clustered)
+    # plot_results(X_clustered, dataset)
 
     return X_clustered
 
-def plot_results(X_clustered):
+def plot_results(X_clustered, dataset):
 
     LABEL_COLOR_MAP = {0 : 'red', 1 : 'blue', 2: 'green'}
     label_color = [LABEL_COLOR_MAP[l] for l in X_clustered]
