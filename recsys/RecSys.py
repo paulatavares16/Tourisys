@@ -17,7 +17,7 @@ class RecSys:
             self._ratings = self._ratings.unique()
             # Normalize ratings
             maxValue = max(self._ratings['rating'])
-            range = 1.0/maxValue;
+            range = 1.0/maxValue
             self._ratings['rating'] = self._ratings['rating'].apply(lambda x: x * range)
             self._train, self._test = gl.recommender.util.random_split_by_user(self._ratings)
 
