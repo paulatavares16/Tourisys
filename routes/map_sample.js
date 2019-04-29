@@ -4,7 +4,7 @@ function initMap() {
   var latLngWaypoints = getLatLng();
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 14,
-    center: { lat: -12.8996, lng: -38.4035924 }
+    center: window.conf_origin
   });
   directionsDisplay.setMap(map);
 
@@ -32,7 +32,7 @@ function calculateAndDisplayRoute(
   directionsService.route(
     {
       origin: window.conf_origin,
-      destination: { lat: -13.00792144, lng: -38.51707822 },
+      destination: window.conf_origin,
       waypoints: latLngWaypoints,
       travelMode: google.maps.TravelMode[selectedMode],
       optimizeWaypoints: true,

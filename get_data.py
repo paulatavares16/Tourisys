@@ -2,12 +2,13 @@
 from geolocation.Nominatim import *
 from poi.OverlayData import *
 from poi.GMapsData import *
+from config import user_location_str
 
 # Instânciamento da classe do Nominatim 
 # utilizada para realizar buscas com o OSM
-nominatim = Nominatim();
+nominatim = Nominatim()
 # Query que retorna informações de uma localidade segundo OSM
-nominatim.query("Salvador,Bahia,Brazil")
+nominatim.query(user_location_str)
 # Determinação de id da área buscada/determinada
 areaIdSalvador = nominatim.areaId()
 
