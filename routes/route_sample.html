@@ -31,6 +31,7 @@
         padding-left: 10px;
       }
     </style>
+    <script src="map_sample.js"></script>
     <script async defer src="{{ mapsUrl | safe }}"></script>
   </head>
   <body>
@@ -49,6 +50,5 @@
       window.conf_origin = {{ conf_origin | tojson }};
       window.waypoints = {{waypoints | tojson }}
     </script>
-    <script src="map_sample.js"></script>
   </body>
 </html>
