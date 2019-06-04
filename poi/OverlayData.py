@@ -7,9 +7,12 @@ class OverlayData:
     _categoryLink_art = [
         {'selector': '["amenity"="arts_centre"]', 'type': 'arts_centre'},
         {'selector': '["tourism"="gallery"]', 'type': 'gallery'},
+        {'selector': '["tourism"="artwork"][artwork_type!~"statue"]', 'type': 'artwork'},
         {'selector': '["historic"~"^monument$|^memorial$"]', 'type': 'monument_memorial'},
         {'selector': '["tourism"="museum"]', 'type': 'museum'},
         {'selector': '["historic"="statue"]', 'type': 'statue'},
+        {'selector': '["historic"][historic!~"memorial|monument|statue|castle"]', 'type': 'historic'},
+
     ]
 
     _categoryLink_entertainment = [
@@ -78,13 +81,18 @@ class OverlayData:
                     if d['id'] == element.id:
                         d['type'].append(category)
 
-    def poiData(self, areaId):
+    def poiData(self, areaId, choice):
         print 'Querys do OverPass'
         # API de consulta que retorna data do OSM, de acordo com a query construida
         api = overpy.Overpass()
+        choices = {
+            "art": self._categoryLink_art,
+            "entertainment": self._categoryLink_entertainment,
+            "all": self._categoryLink,
+        }
 
         # Construção das querys a serem consultadas, baseadas nas categorias determinadas no array
-        for category in self._categoryLink_art:
+        for category in choices[choice]:
             # Todos os resultados das querys realizadas são adicionados na lista de elementos
             elements = []
 
