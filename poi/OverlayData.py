@@ -4,8 +4,29 @@ import overpy
 
 
 class OverlayData:
+    _categoryLink_art = [
+        {'selector': '["amenity"="arts_centre"]', 'type': 'arts_centre'},
+        {'selector': '["tourism"="gallery"]', 'type': 'gallery'},
+        {'selector': '["historic"~"^monument$|^memorial$"]', 'type': 'monument_memorial'},
+        {'selector': '["tourism"="museum"]', 'type': 'museum'},
+        {'selector': '["historic"="statue"]', 'type': 'statue'},
+    ]
+
+    _categoryLink_entertainment = [
+        {'selector': '["tourism"="attraction"]', 'type': 'attraction'},
+        {'selector': '["tourism"="information"]', 'type': 'information'},
+        {'selector': '["tourism"="theme_park"]', 'type': 'theme_park'},
+        {'selector': '["tourism"="viewpoint"]', 'type': 'viewpoint'},
+        {'selector': '["tourism"="zoo"]', 'type': 'zoo'},
+        {'selector': '["leisure"="casino"]', 'type': 'casino'},
+        {'selector': '["leisure"="gastro"]', 'type': 'gastro'},
+        {'selector': '["tourism"="picnic_site"]', 'type': 'picnic'},
+
+    ]
+
     _categoryLink = [
         {'selector': '["amenity"="arts_centre"]', 'type': 'arts_centre'},
+        {'selector': '["leisure"="gastro"]', 'type': 'gastro'},
         # {'selector': '["tourism"="artwork"][artwork_type!~"statue"]', 'type': 'artwork'},
         {'selector': '["tourism"="attraction"]', 'type': 'attraction'},
         # {'selector': '["leisure"="casino"]', 'type': 'casino'},
@@ -63,7 +84,7 @@ class OverlayData:
         api = overpy.Overpass()
 
         # Construção das querys a serem consultadas, baseadas nas categorias determinadas no array
-        for category in self._categoryLink:
+        for category in self._categoryLink_art:
             # Todos os resultados das querys realizadas são adicionados na lista de elementos
             elements = []
 
