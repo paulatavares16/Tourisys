@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import get_data
+
 from recsys.RecSys import *
 
 recSys = RecSys(user_data='data/user.json', item_data='data/poi.json', rating_data='data/review.json')
