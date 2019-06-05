@@ -1,11 +1,36 @@
 # -*- coding: utf-8 -*-
 # Python Wrapper para acesso ao Overpass aPI
 import overpy
+import time
 
 
 class OverlayData:
+    _categoryLink_art = [
+        {'selector': '["amenity"="arts_centre"]', 'type': 'arts_centre'},
+        {'selector': '["tourism"="gallery"]', 'type': 'gallery'},
+        {'selector': '["tourism"="artwork"][artwork_type!~"statue"]', 'type': 'artwork'},
+        {'selector': '["historic"~"^monument$|^memorial$"]', 'type': 'monument_memorial'},
+        {'selector': '["tourism"="museum"]', 'type': 'museum'},
+        {'selector': '["historic"="statue"]', 'type': 'statue'},
+        {'selector': '["historic"][historic!~"memorial|monument|statue|castle"]', 'type': 'historic'},
+
+    ]
+
+    _categoryLink_entertainment = [
+        {'selector': '["tourism"="attraction"]', 'type': 'attraction'},
+        {'selector': '["tourism"="information"]', 'type': 'information'},
+        {'selector': '["tourism"="theme_park"]', 'type': 'theme_park'},
+        {'selector': '["tourism"="viewpoint"]', 'type': 'viewpoint'},
+        {'selector': '["tourism"="zoo"]', 'type': 'zoo'},
+        {'selector': '["leisure"="casino"]', 'type': 'casino'},
+        {'selector': '["leisure"="gastro"]', 'type': 'gastro'},
+        {'selector': '["tourism"="picnic_site"]', 'type': 'picnic'},
+
+    ]
+
     _categoryLink = [
         {'selector': '["amenity"="arts_centre"]', 'type': 'arts_centre'},
+        {'selector': '["leisure"="gastro"]', 'type': 'gastro'},
         # {'selector': '["tourism"="artwork"][artwork_type!~"statue"]', 'type': 'artwork'},
         {'selector': '["tourism"="attraction"]', 'type': 'attraction'},
         # {'selector': '["leisure"="casino"]', 'type': 'casino'},
@@ -57,13 +82,18 @@ class OverlayData:
                     if d['id'] == element.id:
                         d['type'].append(category)
 
-    def poiData(self, areaId):
+    def poiData(self, areaId, choice):
         print 'Querys do OverPass'
         # API de consulta que retorna data do OSM, de acordo com a query construida
         api = overpy.Overpass()
+        choices = {
+            "art": self._categoryLink_art,
+            "entertainment": self._categoryLink_entertainment,
+            "all": self._categoryLink,
+        }
 
         # Construção das querys a serem consultadas, baseadas nas categorias determinadas no array
-        for category in self._categoryLink:
+        for category in choices[choice]:
             # Todos os resultados das querys realizadas são adicionados na lista de elementos
             elements = []
 

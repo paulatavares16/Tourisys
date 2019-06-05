@@ -1,0 +1,72 @@
+{% extends "main.html" %} {% block content %}
+<div class="wait-text">
+  <p class="warning-main">
+    A geração de recomendação pode demorar por volta de
+    <span class="warning-main-time">10 min</span>
+  </p>
+  <p class="warning-main-sub">
+    As rotas abrirão em uma nova aba em breve. Tempo decorrido:
+  </p>
+</div>
+<div style="justify-content: center; display: flex;">
+  <div id="screen">
+    00 : 00 : 00
+  </div>
+</div>
+
+<style>
+  #screen {
+    font-family: Calibri, Arial;
+    font-weight: 300;
+    font-size: 45px;
+    width: 330px;
+    height: 50px;
+    color: gray;
+    letter-spacing: 3px;
+  }
+  .wait-text {
+    justify-content: center;
+  }
+  .warning-main {
+    font-size: 30px;
+  }
+  .warning-main-sub {
+    font-size: 22px;
+  }
+  .warning-main-time {
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  window.onload = function() {
+    pantalla = document.getElementById("screen");
+  };
+  var isMarch = false;
+  var acumularTime = 0;
+  if (isMarch == false) {
+    timeInicial = new Date();
+    control = setInterval(cronometro, 10);
+    isMarch = true;
+  }
+  function cronometro() {
+    timeActual = new Date();
+    acumularTime = timeActual - timeInicial;
+    acumularTime2 = new Date();
+    acumularTime2.setTime(acumularTime);
+    cc = Math.round(acumularTime2.getMilliseconds() / 10);
+    ss = acumularTime2.getSeconds();
+    mm = acumularTime2.getMinutes();
+    if (cc < 10) {
+      cc = "0" + cc;
+    }
+    if (ss < 10) {
+      ss = "0" + ss;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+    pantalla.innerHTML = mm + " : " + ss + " : " + cc;
+  }
+</script>
+{% endblock %}

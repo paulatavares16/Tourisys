@@ -19,8 +19,8 @@
       }
       #floating-panel {
         position: absolute;
-        top: 10px;
-        left: 25%;
+        top: 80px;
+        left: 208px;
         z-index: 5;
         background-color: #fff;
         padding: 5px;
@@ -30,10 +30,41 @@
         line-height: 30px;
         padding-left: 10px;
       }
+      .tabs {
+        background: #fff;
+        z-index: 15;
+        display: flex;
+        height: 36px;
+        padding: 16px 50px;
+      }
+      .tab-one {
+        padding: 0px 10px;
+        background: #71a1ceb3;
+        margin: 0 20px;
+        border-radius: 10px;
+        align-items: center;
+        display: flex;
+      }
+      .tab-one a {
+        text-decoration: none;
+        color: #000;
+      }
     </style>
+    <script src="map_sample.js"></script>
     <script async defer src="{{ mapsUrl | safe }}"></script>
   </head>
   <body>
+    <div class="tabs">
+      <div class="tab-one">
+        <a href="route-0.html">Primeira Rota</a>
+      </div>
+      <div class="tab-one">
+        <a href="route-1.html">Segunda Rota</a>
+      </div>
+      <div class="tab-one">
+        <a href="route-2.html">Terceira Rota</a>
+      </div>
+    </div>
     <div id="floating-panel">
       <b>Mode of Travel: </b>
       <select id="mode">
@@ -49,6 +80,5 @@
       window.conf_origin = {{ conf_origin | tojson }};
       window.waypoints = {{waypoints | tojson }}
     </script>
-    <script src="map_sample.js"></script>
   </body>
 </html>

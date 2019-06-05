@@ -19,8 +19,8 @@
       }
       #floating-panel {
         position: absolute;
-        top: 10px;
-        left: 25%;
+        top: 80px;
+        left: 208px;
         z-index: 5;
         background-color: #fff;
         padding: 5px;
@@ -30,10 +30,41 @@
         line-height: 30px;
         padding-left: 10px;
       }
+      .tabs {
+        background: #fff;
+        z-index: 15;
+        display: flex;
+        height: 36px;
+        padding: 16px 50px;
+      }
+      .tab-one {
+        padding: 0px 10px;
+        background: #71a1ceb3;
+        margin: 0 20px;
+        border-radius: 10px;
+        align-items: center;
+        display: flex;
+      }
+      .tab-one a {
+        text-decoration: none;
+        color: #000;
+      }
     </style>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG24dCqsMbLamfZxI5IyBnclDuKrwcctM&callback=initMap"></script>
+    <script src="map_sample.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK1xIL14DouY_TnwG3XkWcFEUKaLi0X04&callback=initMap"></script>
   </head>
   <body>
+    <div class="tabs">
+      <div class="tab-one">
+        <a href="route-0.html">Primeira Rota</a>
+      </div>
+      <div class="tab-one">
+        <a href="route-1.html">Segunda Rota</a>
+      </div>
+      <div class="tab-one">
+        <a href="route-2.html">Terceira Rota</a>
+      </div>
+    </div>
     <div id="floating-panel">
       <b>Mode of Travel: </b>
       <select id="mode">
@@ -46,9 +77,8 @@
     <div id="map"></div>
     <div id="map2"></div>
     <script>
-      window.conf_origin = {"lat": -13.00943906, "lng": -38.51449502};
-      window.waypoints = [{"lat": -12.936188, "lng": -38.3999248}, {"lat": -12.9505838, "lng": -38.3676792}]
+      window.conf_origin = {"lat": -23.5489, "lng": -46.6388};
+      window.waypoints = [{"lat": -23.5724728, "lng": -46.445368}]
     </script>
-    <script src="map_sample.js"></script>
   </body>
 </html>
