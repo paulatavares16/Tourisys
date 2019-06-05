@@ -3,3 +3,4 @@ tourisys_env
 data/
 *.pyc
 routes/
+routes/route-*.html
