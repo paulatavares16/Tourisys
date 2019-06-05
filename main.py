@@ -12,7 +12,7 @@ def sendCateg():
   choice = request.form.get('options')
   args = ["python", "gen_recomen.py", choice]
   subprocess.Popen(args)
-  return "Aguarde"
+  return render_template('wait.html')
     
 if __name__ == "__main__":
     app.run(debug=True)

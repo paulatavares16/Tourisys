@@ -1,18 +1,82 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Tourisys</title>
-  </head>
-  <body>
-    <h1>Escolha para qual categoria você deseja gerar as recomendações</h1>
-    <form action="/sendCategory" method="post">
-      <div>
-        <input type="radio" name="options" id="art" value="art">Arte</input><br>
-        <input type="radio" name="options" id="entertainment" value="entertainment">Entreterimento</input><br>
-        <input type="radio" name="options" id="all" value="all">Todas categorias</input><br>
+{% extends "main.html" %} {% block content %}
+<div>
+  <h1 class="main-title">Categorias para recomendações de Rotas:</h1>
+</div>
+<div>
+  <form action="/sendCategory" method="post">
+    <div class="form-options">
+      <div class="choose-box">
+        <div>
+          <img
+            class="img-box"
+            src="https://media.timeout.com/images/105246805/630/472/image.jpg"
+          />
+        </div>
+        <div>
+          <input type="radio" name="options" id="art" value="art" />
+          <label class="label-options" for="art">Arte e História</label>
+        </div>
       </div>
-      <input type="submit" value="Escolher categorias"/>
-    </form>
-  </body>
-</html>
+      <div class="choose-box">
+        <div>
+          <img
+            class="img-box"
+            src="https://parade.com/wp-content/uploads/2017/09/carousel-theme-park-ftr.jpg"
+          />
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="options"
+            id="entertainment"
+            value="entertainment"
+          />
+          <label class="label-options" for="entertainment"
+            >Entreterimento</label
+          >
+        </div>
+      </div>
+      <div class="choose-box">
+        <div>
+          <img
+            class="img-box"
+            src="https://uit.no/Content/536847/cache=1506494563000/NordicSymposiumonTourismand.jpg"
+          />
+        </div>
+        <div>
+          <input type="radio" name="options" id="all" value="all" />
+          <label class="label-options" far="all">Todas categorias</label>
+        </div>
+      </div>
+    </div>
+    <input class="submit-option" type="submit" value="Escolher categorias" />
+  </form>
+</div>
+
+<style>
+  .main-title {
+    color: #425056;
+  }
+  .choose-box {
+    width: 300px;
+  }
+  .img-box {
+    height: 150px;
+    border-radius: 10px;
+  }
+  .form-options {
+    display: flex;
+    margin-top: 80px;
+    justify-content: space-around;
+  }
+  .label-options {
+    margin-top: 20px;
+    color: #425056;
+  }
+  .submit-option {
+    border-radius: 10px;
+    width: 170px;
+    margin-top: 30px;
+  }
+</style>
+{% endblock %}

@@ -44,8 +44,8 @@ class Route:
 
         with io.open('routes/route-%d.html'% ind, 'w', encoding='utf8') as route_file:
             route_file.write(template.render(mapsUrl=mapsUrl, conf_origin=user_location, waypoints=waypoints))
-        
-        webbrowser.open('file://' + os.path.realpath('routes/route-%d.html'% ind))
+        if ind == 0:
+            webbrowser.open('file://' + os.path.realpath('routes/route-%d.html'% ind))
             
 
     def map(self):
