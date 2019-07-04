@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-import get_data
+
+# Using founded data
+# import get_data
 
 from recsys.RecSys import *
 
@@ -22,10 +24,11 @@ recSys.itemSimilarity(eval=True)
 
 ## Recommends for new users
 recent_data = gl.SFrame()
-recent_data['user_id'] = ['108096371283696583542']
+recent_data['user_id'] = ['114738869037595737400']
 recent_data['item_id'] = [59392558]
 recent_data['rating'] = [0.8]
-recSys.itemSimilarity(similarityType='pearson', newUsers=[108096371283696583542], newObservationData=recent_data, eval=True)
+# recSys.itemSimilarity(similarityType='pearson', newUsers=[108096371283696583542], newObservationData=recent_data, eval=True)
+# recSys.itemSimilarity(similarityType='pearson', newUsers=[114738869037595737400], newObservationData=recent_data)
 # recSys.itemContent(newUsers=[99999], newObservationData=recent_data)
 
 ## Get similar items

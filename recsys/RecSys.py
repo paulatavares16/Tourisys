@@ -31,13 +31,14 @@ class RecSys:
         return self._ratings.size()
 
     def itemSimilarity(self, similarityType='jaccard', newUsers=None, newObservationData=None, eval=False, similarItem=None):
-        print(self._ratings.dtype())
+        # print(self._ratings.dtype())
         isr = gl.item_similarity_recommender.create(self._ratings, target='rating', similarity_type=similarityType)
         recs = isr.recommend(users=newUsers, new_observation_data=newObservationData).join(self._items, on='item_id').sort('rank')
         print 'Recomendacoes por similaridade com base completa'
         print(recs)
 
         if eval:
+            print 'Recomendacoes EVAAL'
             # Executa o treinamento e teste com os grupos previamente criados
             isrTrain = gl.item_similarity_recommender.create(self._train, target='rating', similarity_type=similarityType)
             # Retorna o precision e o recall
