@@ -5,9 +5,9 @@
 
 from recsys.RecSys import *
 
-recSys = RecSys(user_data='data/user.json', item_data='data/poi.json', rating_data='data/review.json')
+recSys = RecSys(user_data='data/sp_users_convert.json', item_data='data/sp_pois_convert.json', rating_data='data/sp_reviews_convert.json')
 ## Evaluates
-recSys.itemSimilarity(eval=True)
+# recSys.itemSimilarity(eval=True)
 # recSys.itemSimilarity(similarityType='cosine', eval=True)
 # recSys.itemSimilarity(similarityType='pearson', eval=True)
 
@@ -24,11 +24,17 @@ recSys.itemSimilarity(eval=True)
 
 ## Recommends for new users
 recent_data = gl.SFrame()
-recent_data['user_id'] = ['114738869037595737400']
+recent_data['user_id'] = ['100000260748852833494']
 recent_data['item_id'] = [59392558]
 recent_data['rating'] = [0.8]
+
 # recSys.itemSimilarity(similarityType='pearson', newUsers=[108096371283696583542], newObservationData=recent_data, eval=True)
-# recSys.itemSimilarity(similarityType='pearson', newUsers=[114738869037595737400], newObservationData=recent_data)
+#recSys.itemSimilarity(newUsers=['100003258120679643845'])
+
+def test(user_id):
+    recSys.itemSimilarity(newUsers=[user_id], newObservationData=recSys._ratings.filter_by([user_id], 'user_id'))
+test('100048669037283425080')
+import pdb; pdb.set_trace()
 # recSys.itemContent(newUsers=[99999], newObservationData=recent_data)
 
 ## Get similar items

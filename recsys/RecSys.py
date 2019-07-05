@@ -32,7 +32,8 @@ class RecSys:
 
     def itemSimilarity(self, similarityType='jaccard', newUsers=None, newObservationData=None, eval=False, similarItem=None):
         # print(self._ratings.dtype())
-        isr = gl.item_similarity_recommender.create(self._ratings, target='rating', similarity_type=similarityType)
+        ratings_without_recommend = self._ratings.filter_by(newUsers, 'user_id', exclude=True)
+        isr = gl.recommender.ranking_factorization_recommender.create(ratings_without_recommend, target='rating')
         recs = isr.recommend(users=newUsers, new_observation_data=newObservationData).join(self._items, on='item_id').sort('rank')
         print 'Recomendacoes por similaridade com base completa'
         print(recs)
@@ -40,7 +41,7 @@ class RecSys:
         if eval:
             print 'Recomendacoes EVAAL'
             # Executa o treinamento e teste com os grupos previamente criados
-            isrTrain = gl.item_similarity_recommender.create(self._train, target='rating', similarity_type=similarityType)
+            isrTrain = gl.recommender.ranking_factorization_recommender.create(self._train, target='rating')
             # Retorna o precision e o recall
             evalPrecisionRecall = isrTrain.evaluate_precision_recall(self._test)
             # Avaliação do erro Root Mean Square Error
@@ -53,6 +54,7 @@ class RecSys:
             print 'RMSE'
             print(evalRMSE)
 
+        #import pdb; pdb.set_trace()
         # Recomendação feita baseada em item
         if similarItem:
             similarity = isr.get_similar_items(similarItem).join(self._items, on={'similar': 'item_id'}).sort('rank')
@@ -62,7 +64,7 @@ class RecSys:
         # Escreve as rotas para serem utilizadas no web
         if newUsers and newObservationData:
             route = Route(recs['latitude'], recs['longitude'])
-            route.map()
+            #route.map()
 
     # Metodo - acima - que realiza diferentes operacoes, poderia ser 3 metodos
 
