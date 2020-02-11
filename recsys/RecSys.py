@@ -2,6 +2,8 @@
 
 # GraphLab - framework for machine learning
 import graphlab as gl
+import graphlab.aggregate as agg
+import pandas
 from routes.Route import *
 
 class RecSys:
@@ -15,11 +17,26 @@ class RecSys:
         if rating_data:
             self._ratings = gl.SFrame.read_json(rating_data, orient='records')
             self._ratings = self._ratings.unique()
+            
+            reviewsPerUser = self._ratings.groupby(key_columns='user_id', operations={'qtd': agg.COUNT()})
+            topReviewers = reviewsPerUser[reviewsPerUser['qtd'] >= 5]
+            topReviewers['marker'] = 1
+            joined = self._ratings.join(topReviewers, on='user_id', how='left')
+            self._ratings = joined[joined['marker'] == 1]
+            self._ratings.remove_column('marker')
+            self._ratings.remove_column('qtd')
+
             # Normalize ratings
             maxValue = max(self._ratings['rating'])
             range = 1.0/maxValue
+            print("Max value!!!!!!!!!")
+            print(maxValue)
             self._ratings['rating'] = self._ratings['rating'].apply(lambda x: x * range)
             self._train, self._test = gl.recommender.util.random_split_by_user(self._ratings)
+            print("deug!!!!!!!!!")
+            print(self._train)
+            print("test!!!!!!!!!")
+            print(self._test)
 
     def usersSize(self):
         return self._users.size()

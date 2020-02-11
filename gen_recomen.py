@@ -32,7 +32,7 @@ recent_data['rating'] = [0.8]
 #recSys.itemSimilarity(newUsers=['100003258120679643845'])
 
 def test(user_id):
-    recSys.itemSimilarity(newUsers=[user_id], newObservationData=recSys._ratings.filter_by([user_id], 'user_id'))
+    recSys.itemSimilarity(newUsers=[user_id], newObservationData=recSys._ratings.filter_by([user_id], 'user_id'), eval=True)
 test('100048669037283425080')
 # import pdb; pdb.set_trace()
 # recSys.itemContent(newUsers=[99999], newObservationData=recent_data)
