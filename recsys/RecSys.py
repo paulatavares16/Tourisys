@@ -81,7 +81,7 @@ class RecSys:
         # Escreve as rotas para serem utilizadas no web
         if newUsers and newObservationData:
             route = Route(recs['latitude'], recs['longitude'])
-            #route.map()
+            route.map()
 
     # Metodo - acima - que realiza diferentes operacoes, poderia ser 3 metodos
 

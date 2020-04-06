@@ -1,0 +1,64 @@
+{% extends "main.html" %} {% block content %}
+<div>
+  {% if choice == "true" %}
+  <h3 class="main-title">Escolha os lugares que você visitou e gostou:</h3>
+  {% else %}
+  <h3 class="main-title">Escolha os lugares que você gostaria de visitar:</h3>
+  {% endif %}
+  <form action="/send_result" method="post" class="multiple-choice">
+    {% for item in sp_points %}
+    <div class="item-selection">
+      <input id={{item.name}} type="checkbox" name="select_points[]" value={{item.gPlusPlaceId}}>
+      <label for={{item.name}}>{{item.name}}</label>
+    </div>
+    {% endfor %}
+    <input class="submit-option" type="submit" value="Escolher cidades" />
+  </form>
+</div>
+
+<style>
+  .main-title {
+    color: #425056;
+  }
+
+  .choose-box {
+    width: 300px;
+  }
+
+  .img-box {
+    height: 150px;
+    border-radius: 10px;
+  }
+
+  .form-options {
+    display: flex;
+    margin-top: 80px;
+    justify-content: space-around;
+  }
+
+  .label-options {
+    margin-top: 20px;
+    color: #425056;
+  }
+
+  .submit-option {
+    border-radius: 10px;
+    width: 170px;
+    margin-top: 30px;
+  }
+
+  .multiple-choice {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item-selection {
+    display: flex;
+    padding: 6px;
+    border: 1px solid #000000;
+    margin: 6px 0;
+    border-radius: 6px;
+    align-items: center;
+  }
+</style>
+{% endblock %}
