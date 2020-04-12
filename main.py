@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
+from pymongo import MongoClient
 import subprocess
 import random
 
 app = Flask(__name__)
+client = MongoClient("localhost", 27017)
 
 @app.route("/")
 def home():
@@ -45,30 +47,29 @@ def sendCateg():
     {'name': u'Bella Paulista Casa dos P\xe3es', 'price': None, 'address': [u'Rua Haddock Lobo, 354 - Consola\xe7\xe3o', u'S\xe3o Paulo - SP', u'01414-000, Brazil'], 'hours': [[u'Monday', [[u'Open 24 hours']]], [u'Tuesday', [[u'Open 24 hours']], 1], [u'Wednesday', [[u'Open 24 hours']]], [u'Thursday', [[u'Open 24 hours']]], [u'Friday', [[u'Open 24 hours']]], [u'Saturday', [[u'Open 24 hours']]], [u'Sunday', [[u'Open 24 hours']]]], 'phone': u'(11) 3214-3347', 'closed': False, 'gPlusPlaceId': '112292053009561912801', 'gps': [-23.556193, -46.659988]}
   ]
   user_name = request.form.get('user_name')
-  choice = request.form.get('options')
+  user_email = request.form.get('user_email')
+  knowCity = request.form.get('options')
   
-  user_to_add = {'name': user_name, 'gPlusUserId': random.random()*100}
-  print(user_to_add)
-  ## LOG
-  print('User know the city?:', choice)
-  
-  with open('sp_users.json', 'a') as file:
-    file.write(str(user_to_add))
-    print('write')
-  file.close()
-  
-  return render_template('choose_points.html', choice=choice, sp_points=sp_points)
+  return render_template('choose_points.html', knowCity=knowCity, sp_points=sp_points, user_name=user_name, user_email=user_email)
   # return render_template('wait.html')
   
 @app.route("/send_result", methods=['POST'])
 def sendResult():
   choices = request.form.getlist('select_points[]')
-  print(choices)
+  knowCity= request.form.get('knowCity')
+  user_name = request.form.get('user_name')
+  user_email = request.form.get('user_email')
+  gPlusUserId = random.random()*10000000000000000
+  user_to_add = {'name': user_name, 'gPlusUserId': gPlusUserId, 'email': user_email, 'knowCity': knowCity}
   
-  args = ["python", "gen_recomen.py"]
-  subprocess.Popen(args)
+  db=client.tcc
+  result=db.user_reviews.insert_one(user_to_add)
   
-  return render_template('know-city.html')
+  for x in choices:
+    review_to_save = {'rating': 5.0, 'gPlusPlaceId': x, 'gPlusUserId': gPlusUserId}
+    result=db.reviews.insert_one(review_to_save)
+  
+  return render_template('thanks.html')
     
 if __name__ == "__main__":
     app.run(debug=True)

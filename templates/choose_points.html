@@ -1,6 +1,6 @@
 {% extends "main.html" %} {% block content %}
 <div>
-  {% if choice == "true" %}
+  {% if knowCity == "true" %}
   <h3 class="main-title">Escolha os lugares que você visitou e gostou:</h3>
   {% else %}
   <h3 class="main-title">Escolha os lugares que você gostaria de visitar:</h3>
@@ -12,6 +12,10 @@
       <label for={{item.name}}>{{item.name}}</label>
     </div>
     {% endfor %}
+    <input hidden name="knowCity" value={{knowCity}}>
+    <input hidden name="user_name" value={{user_name}}>
+    <input hidden name="user_email" value={{user_email}}>
+
     <input class="submit-option" type="submit" value="Escolher cidades" />
   </form>
 </div>
