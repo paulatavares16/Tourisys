@@ -62,7 +62,7 @@ def sendResult():
   gPlusUserId = random.random()*10000000000000000
   user_to_add = {'name': user_name, 'gPlusUserId': gPlusUserId, 'email': user_email, 'knowCity': knowCity}
   
-  db=client.tcc
+  db=client.heroku_9mwpmxbf
   result=db.user_reviews.insert_one(user_to_add)
   
   for x in choices:
