@@ -4,7 +4,7 @@ import subprocess
 import random
 
 app = Flask(__name__)
-client = MongoClient("localhost", 27017)
+client = MongoClient(os.getenv('MONGODB_URI', 'localhost:27017'))
 
 @app.route("/")
 def home():
