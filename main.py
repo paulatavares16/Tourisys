@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from pymongo import MongoClient
 import subprocess
 import random
+import os
 
 app = Flask(__name__)
 client = MongoClient(os.getenv('MONGODB_URI', 'localhost:27017'))
