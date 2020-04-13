@@ -28,8 +28,6 @@ genson==0.1.0
 geographiclib==1.49
 geopy==1.19.0
 googlemaps==3.0.2
-GraphLab-Create==2.1
-GraphLab-Create-License==2.1
 idna==2.8
 ipaddress==1.0.22
 ipykernel==4.10.0
