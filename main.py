@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import subprocess
 import random
 import os
+import json
 
 app = Flask(__name__)
 client = MongoClient(os.getenv('MONGODB_URI', 'localhost:27017'))
@@ -56,21 +57,18 @@ def sendCateg():
   
 @app.route("/send_result", methods=['POST'])
 def sendResult():
-  choices = request.form.getlist('select_points[]')
-  knowCity= request.form.get('knowCity')
-  user_name = request.form.get('user_name')
-  user_email = request.form.get('user_email')
+  
+  req_data = request.get_json()
   gPlusUserId = random.random()*10000000000000000
-  user_to_add = {'name': user_name, 'gPlusUserId': gPlusUserId, 'email': user_email, 'knowCity': knowCity}
-  
+  user_to_add = {'name': req_data['user']['name'], 'gPlusUserId': gPlusUserId, 'email': req_data['user']['email'], 'recommedCity': req_data['user']['recommedCity']}
+
   db=client.heroku_9mwpmxbf
-  result=db.user_reviews.insert_one(user_to_add)
+  db.users.insert_one(user_to_add)
   
-  for x in choices:
-    review_to_save = {'rating': 5.0, 'gPlusPlaceId': x, 'gPlusUserId': gPlusUserId}
-    result=db.reviews.insert_one(review_to_save)
+  for cat in req_data['categories']:
+    db.user_categories.insert_one(cat)
   
-  return render_template('thanks.html')
+  return 'ok'
     
 if __name__ == "__main__":
     app.run(debug=True, port=os.getenv('PORT', 5000), host='0.0.0.0')
