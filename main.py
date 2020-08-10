@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from flask_cors import CORS
 from pymongo import MongoClient
 import subprocess
 import random
@@ -6,6 +7,8 @@ import os
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
+
 client = MongoClient(os.getenv('MONGODB_URI', 'localhost:27017'))
 
 @app.route("/")
