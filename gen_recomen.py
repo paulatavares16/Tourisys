@@ -33,9 +33,10 @@ recent_data['rating'] = [0.8]
 
 def test(user_id):
     recSys.itemSimilarity(newUsers=[user_id], newObservationData=recSys._ratings.filter_by([user_id], 'user_id'), eval=True)
-test('100048669037283425080')
+# test('100048669037283425080')
 # import pdb; pdb.set_trace()
-# recSys.itemContent(newUsers=[99999], newObservationData=recent_data)
+#recSys.itemContent(attributes=['item_id', 'category'], newUsers=['109872608950295275568'])
+recSys.itemContent(attributes=['item_id', 'category'], newUsers=['109737622095470537985'])
 
 ## Get similar items
 # recSys.itemSimilarity(similarityType='pearson', similarItem=[59224731])
