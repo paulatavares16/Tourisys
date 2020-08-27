@@ -93,7 +93,7 @@ class RecSys:
         if splitAttribute:
             newItems = self._splitAttribute(newItems, splitAttribute)
         icr = gl.item_content_recommender.create(newItems, 'item_id', self._ratings, 'user_id', target='rating')
-        recs = icr.recommend(users=newUsers, new_observation_data=newObservationData, k=100).join(self._items, on='item_id').sort('rank')
+        recs = icr.recommend(users=newUsers, new_observation_data=newObservationData, k=10).join(self._items, on='item_id').sort('rank')
         print 'Recomendacoes por conteudo com base completa'
         print(recs)
 
@@ -114,9 +114,9 @@ class RecSys:
             print 'RMSE'
             print(evalRMSE)
 
-        if newUsers and newObservationData:
+        if newUsers:
             route = Route(recs['latitude'], recs['longitude'])
-            route.map()
+            route.map(newUsers[0])
 
     # Se o item tiver o atributo especificado multivalorado, o item será duplicado
     def _splitAttribute(self, items, attribute):

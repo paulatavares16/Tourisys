@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from pymongo import MongoClient
 import subprocess
@@ -9,7 +9,7 @@ import json
 app = Flask(__name__)
 cors = CORS(app)
 
-client = MongoClient(os.getenv('MONGODB_URI', 'localhost:27017'))
+client = MongoClient(os.getenv('MONGODB_URI', 'mongodb://heroku_9mwpmxbf:kbjivvmpq9m46gr32u4t05bs8u@ds211708.mlab.com:11708/heroku_9mwpmxbf?retryWrites=false'))
 
 @app.route("/")
 def home():
@@ -72,6 +72,16 @@ def sendResult():
     db.user_categories.insert_one(cat)
   
   return 'ok'
+
+@app.route("/get-routes")
+def getRoutes():
+  suggestion_id=request.args.get("suggestion-id")
+  
+  db=client.heroku_9mwpmxbf
+  suggestion_to_find = db.suggestions.find_one({'sugestionId': int(suggestion_id)})
+  suggestion_to_return = {'routes': suggestion_to_find['routes'], 'user': suggestion_to_find['user'], 'sugestionId': suggestion_to_find['sugestionId'] }
+  
+  return jsonify(suggestion_to_return)
     
 if __name__ == "__main__":
     app.run(debug=True, port=os.getenv('PORT', 5000), host='0.0.0.0')
