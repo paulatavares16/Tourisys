@@ -78,8 +78,8 @@ def getRoutes():
   suggestion_id=request.args.get("suggestion-id")
   
   db=client.heroku_9mwpmxbf
-  suggestion_to_find = db.suggestions.find_one({'sugestionId': int(suggestion_id)})
-  suggestion_to_return = {'routes': suggestion_to_find['routes'], 'user': suggestion_to_find['user'], 'sugestionId': suggestion_to_find['sugestionId'] }
+  suggestion_to_find = db.suggestions.find_one({'suggestionId': int(suggestion_id)})
+  suggestion_to_return = {'routes': suggestion_to_find['routes'], 'user': suggestion_to_find['user'], 'suggestionId': suggestion_to_find['suggestionId'] }
   
   return jsonify(suggestion_to_return)
     
