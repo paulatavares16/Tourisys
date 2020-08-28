@@ -80,7 +80,7 @@ class RecSys:
 
         # Escreve as rotas para serem utilizadas no web
         if newUsers and newObservationData:
-            route = Route(recs['latitude'], recs['longitude'])
+            route = Route(recs['latitude'], recs['longitude'], recs['name'])
             route.map()
 
     # Metodo - acima - que realiza diferentes operacoes, poderia ser 3 metodos
@@ -115,7 +115,7 @@ class RecSys:
             print(evalRMSE)
 
         if newUsers:
-            route = Route(recs['latitude'], recs['longitude'])
+            route = Route(recs['latitude'], recs['longitude'], recs['name'])
             route.map(newUsers[0])
 
     # Se o item tiver o atributo especificado multivalorado, o item será duplicado

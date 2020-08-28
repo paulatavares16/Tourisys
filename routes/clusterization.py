@@ -8,11 +8,13 @@ import matplotlib.pyplot as plt
 def clusterization_list():
     headers = ['lat', 'lng']
     dataset = pd.read_csv("routes/file_cluster.csv", decimal=',', header=None)
-    for col in dataset.columns:
+    for col in dataset.columns[:1]:
         dataset[col] = dataset[col].astype(float)
+    # del dataset[dataset.columns[2]]
 
-    kmeans = KMeans(n_clusters=3, random_state=0).fit(dataset)
-    X_clustered = kmeans.fit_predict(dataset)
+    kmeans = KMeans(n_clusters=3, random_state=0).fit(dataset[dataset.columns[:1]])
+    X_clustered = kmeans.fit_predict(dataset[dataset.columns[:1]])
+    import pdb; pdb.set_trace()
     # plot_results(X_clustered, dataset)
 
     return X_clustered

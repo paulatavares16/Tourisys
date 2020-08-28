@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import io
 import webbrowser
 import os
@@ -12,24 +14,27 @@ client = MongoClient(os.getenv('MONGODB_URI', 'mongodb://heroku_9mwpmxbf:kbjivvm
 
 
 class Route:
-    def __init__(self, latitudes, longitudes):
+    def __init__(self, latitudes, longitudes, names):
         self._latitudes = latitudes
         self._longitudes = longitudes
+        self._names = names
 
     def _waypoints(self, list_points):
         waypoints = []
-        for lat, lng in list_points:
-            waypoints.append({'lat': lat, 'lng': lng})
+        for lat, lng, name in list_points:
+            waypoints.append({'lat': lat, 'lng': lng, 'name': name})
         return waypoints
     
     def write_csv(self):
-        list_points = zip(self._latitudes, self._longitudes)
-        file_cluster = io.open('routes/file_cluster.csv', 'w')
+        list_points = zip(self._latitudes, self._longitudes, self._names)
+        file_cluster = io.open('routes/file_cluster.csv', 'w', encoding="utf-8")
         for point in list_points:
-            file_cluster.write(unicode(point[0]) + ',' + unicode(point[1]) + '\n')
+            file_cluster.write(unicode(point[0]) + ',' + unicode(point[1]) + ',')
+            file_cluster.write(point[2].decode('utf-8'))
+            file_cluster.write(u'\n')
 
     def separete_rota(self, clust_num, list_clust):
-        list_points = zip(self._latitudes, self._longitudes)
+        list_points = zip(self._latitudes, self._longitudes, self._names)
         list_points_selct = []
         for ind in range(len(list_clust)):
             if list_clust[ind] == clust_num:
