@@ -82,6 +82,26 @@ def getRoutes():
   suggestion_to_return = {'routes': suggestion_to_find['routes'], 'user': suggestion_to_find['user'], 'suggestionId': suggestion_to_find['suggestionId'] }
   
   return jsonify(suggestion_to_return)
+  
+@app.route("/get-user")
+def getUser():
+  user_id=request.args.get("user-id")
+  
+  db=client.heroku_9mwpmxbf
+  user_to_find = db.users.find_one({'gPlusUserId': int(user_id)})
+  user_to_return = {'email': user_to_find['email'], 'gPlusUserId': user_to_find['gPlusUserId'], 'recommedCity': user_to_find['recommedCity']}
+  
+  return jsonify(user_to_return)
+
+@app.route("/send-evaluation", methods=['POST'])
+def sendEvaluation():
+  
+  req_data = request.get_json()
+
+  db=client.heroku_9mwpmxbf
+  db.evaluation.insert_one(req_data)
+  
+  return 'ok'
     
 if __name__ == "__main__":
     app.run(debug=True, port=os.getenv('PORT', 5000), host='0.0.0.0')

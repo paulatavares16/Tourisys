@@ -1,0 +1,205 @@
+[
+  {
+    "name": "Restaurant fake",
+    "item_id": 0,
+    "category": "Restaurant",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Hotel fake",
+    "item_id": 1,
+    "category": "Hotel",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Bar fake",
+    "item_id": 2,
+    "category": "Bar",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Shopping Mall fake",
+    "item_id": 3,
+    "category": "Shopping Mall",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Cafe fake",
+    "item_id": 4,
+    "category": "Cafe",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Bakery fake",
+    "item_id": 5,
+    "category": "Bakery",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Stadium fake",
+    "item_id": 6,
+    "category": "Stadium",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Club fake",
+    "item_id": 7,
+    "category": "Club",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Park fake",
+    "item_id": 8,
+    "category": "Park",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Resort fake",
+    "item_id": 9,
+    "category": "Resort",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Tourist Attraction fake",
+    "item_id": 10,
+    "category": "Tourist Attraction",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Museum fake",
+    "item_id": 11,
+    "category": "Museum",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Music fake",
+    "item_id": 12,
+    "category": "Music",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Sports fake",
+    "item_id": 13,
+    "category": "Sports",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Theater fake",
+    "item_id": 14,
+    "category": "Theater",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Church fake",
+    "item_id": 15,
+    "category": "Church",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Cultural Center fake",
+    "item_id": 16,
+    "category": "Cultural Center",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Shop fake",
+    "item_id": 17,
+    "category": "Shop",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Pub fake",
+    "item_id": 18,
+    "category": "Pub",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Zoo fake",
+    "item_id": 19,
+    "category": "Zoo",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Brewery fake",
+    "item_id": 20,
+    "category": "Brewery",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Statue fake",
+    "item_id": 21,
+    "category": "Statue",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Entertainment fake",
+    "item_id": 22,
+    "category": "Entertainment",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Fairground fake",
+    "item_id": 23,
+    "category": "Fairground",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Aquarium fake",
+    "item_id": 24,
+    "category": "Aquarium",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Art Gallery fake",
+    "item_id": 25,
+    "category": "Art Gallery",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Beach fake",
+    "item_id": 26,
+    "category": "Beach",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Nature fake",
+    "item_id": 27,
+    "category": "Nature",
+    "longitude": 0,
+    "latitude": 0
+  },
+  {
+    "name": "Culture fake",
+    "item_id": 28,
+    "category": "Culture",
+    "longitude": 0,
+    "latitude": 0
+  }
+]

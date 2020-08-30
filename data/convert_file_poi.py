@@ -35,7 +35,7 @@ with open("ssa_pois.json") as poi_data_file:
                     data = {
                         "item_id": gPlusPlaceId,
                         "name": line_json['name'],
-                        "category": ','.join(place_categories[gPlusPlaceId]),
+                        "category": place_categories[gPlusPlaceId][0],
                         "longitude": line_json['gps'][1],
                         "latitude": line_json['gps'][0],
                     }

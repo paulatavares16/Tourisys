@@ -24,9 +24,9 @@ recSys = RecSys(user_data='data/sp_users_convert.json', item_data='data/sp_pois_
 
 ## Recommends for new users
 recent_data = gl.SFrame()
-recent_data['user_id'] = ['100000260748852833494']
-recent_data['item_id'] = [59392558]
-recent_data['rating'] = [0.8]
+recent_data['item_id'] = ['1', '2', '4']
+recent_data['rating'] = [1.0, 1.0, 1.0]
+recent_data['user_id'] = ['6257937828596629', '6257937828596629', '6257937828596629']
 
 # recSys.itemSimilarity(similarityType='pearson', newUsers=[108096371283696583542], newObservationData=recent_data, eval=True)
 #recSys.itemSimilarity(newUsers=['100003258120679643845'])
@@ -36,7 +36,8 @@ def test(user_id):
 # test('100048669037283425080')
 # import pdb; pdb.set_trace()
 #recSys.itemContent(attributes=['item_id', 'category'], newUsers=['109872608950295275568'])
-recSys.itemContent(attributes=['item_id', 'category'], newUsers=['109737622095470537985'])
+
+recSys.itemContent(attributes=['item_id', 'category'], newUsers=['6257937828596629'], newObservationData=recent_data)
 
 ## Get similar items
 # recSys.itemSimilarity(similarityType='pearson', similarItem=[59224731])
