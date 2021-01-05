@@ -19,10 +19,51 @@ Installing others dependences on virtualenv:
 pip install -r requirements.txt
 ```
 
-## Running
+## Executando com dataset Google Local Reviews
 
-Instructions:
+### Gerando os dados
 
-- In [config.py](config.py) add your Google API Key
-- In [get_data.py](get_data.py), setting your query (place to search poins of interest in the region that you choose);
-- In [gen_recomen.py](gen_recomen.py), Choose type of recommender (ItemSimilary or ItemContent and your attributes).
+O dataset engloba o mundo inteiro, é necessário filtrar o país desejado para melhorar tempo de execução das próximas buscas por cidades, no momento o script está configurado para filtrar as informações referentes ao Brasil.
+
+```
+
+python data_filter.py
+
+```
+
+Como output serão criados os arquivos: brasil_reviews.json, brasil_users.json e poi_brasil.json
+
+Para gerar os dados referentes a uma cidade é necessário executar o script indicado a baixo. No momento o arquivoe está configurado para gerar informações para São Paulo.
+
+```
+
+python data_filter_sp.json
+
+```
+
+### Convertendo os dados
+
+É necessário converter os dados para o formato esperado pela função do GraphLab. Para isso é executado o script abaixo:
+
+```
+python convert_file_poi.py
+
+```
+
+### Executando o algorítimo
+
+Para a execução do sistema é necessário adicionar um ponto de partida, de preferência na cidade utilizada na filtragem, no arquivo [config.py](config.py)
+
+```
+
+user_location = {'lat': -23.5489, 'lng': -46.6388} # É a posição inicial em SP
+
+```
+
+Depois basta executar o arquivo principal
+
+```
+
+python main.py
+
+```

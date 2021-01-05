@@ -2,6 +2,8 @@
 
 # GraphLab - framework for machine learning
 import graphlab as gl
+import graphlab.aggregate as agg
+import pandas
 from routes.Route import *
 
 class RecSys:
@@ -15,11 +17,26 @@ class RecSys:
         if rating_data:
             self._ratings = gl.SFrame.read_json(rating_data, orient='records')
             self._ratings = self._ratings.unique()
+            
+            reviewsPerUser = self._ratings.groupby(key_columns='user_id', operations={'qtd': agg.COUNT()})
+            topReviewers = reviewsPerUser[reviewsPerUser['qtd'] >= 5]
+            topReviewers['marker'] = 1
+            joined = self._ratings.join(topReviewers, on='user_id', how='left')
+            self._ratings = joined[joined['marker'] == 1]
+            self._ratings.remove_column('marker')
+            self._ratings.remove_column('qtd')
+
             # Normalize ratings
             maxValue = max(self._ratings['rating'])
             range = 1.0/maxValue
+            print("Max value!!!!!!!!!")
+            print(maxValue)
             self._ratings['rating'] = self._ratings['rating'].apply(lambda x: x * range)
             self._train, self._test = gl.recommender.util.random_split_by_user(self._ratings)
+            print("deug!!!!!!!!!")
+            print(self._train)
+            print("test!!!!!!!!!")
+            print(self._test)
 
     def usersSize(self):
         return self._users.size()
@@ -31,15 +48,17 @@ class RecSys:
         return self._ratings.size()
 
     def itemSimilarity(self, similarityType='jaccard', newUsers=None, newObservationData=None, eval=False, similarItem=None):
-        print(self._ratings.dtype())
-        isr = gl.item_similarity_recommender.create(self._ratings, target='rating', similarity_type=similarityType)
+        # print(self._ratings.dtype())
+        ratings_without_recommend = self._ratings.filter_by(newUsers, 'user_id', exclude=True)
+        isr = gl.recommender.ranking_factorization_recommender.create(ratings_without_recommend, target='rating')
         recs = isr.recommend(users=newUsers, new_observation_data=newObservationData).join(self._items, on='item_id').sort('rank')
         print 'Recomendacoes por similaridade com base completa'
         print(recs)
 
         if eval:
+            print 'Recomendacoes EVAAL'
             # Executa o treinamento e teste com os grupos previamente criados
-            isrTrain = gl.item_similarity_recommender.create(self._train, target='rating', similarity_type=similarityType)
+            isrTrain = gl.recommender.ranking_factorization_recommender.create(self._train, target='rating')
             # Retorna o precision e o recall
             evalPrecisionRecall = isrTrain.evaluate_precision_recall(self._test)
             # Avaliação do erro Root Mean Square Error
@@ -52,6 +71,7 @@ class RecSys:
             print 'RMSE'
             print(evalRMSE)
 
+        #import pdb; pdb.set_trace()
         # Recomendação feita baseada em item
         if similarItem:
             similarity = isr.get_similar_items(similarItem).join(self._items, on={'similar': 'item_id'}).sort('rank')
@@ -60,7 +80,7 @@ class RecSys:
 
         # Escreve as rotas para serem utilizadas no web
         if newUsers and newObservationData:
-            route = Route(recs['latitude'], recs['longitude'])
+            route = Route(recs['latitude'], recs['longitude'], recs['name'])
             route.map()
 
     # Metodo - acima - que realiza diferentes operacoes, poderia ser 3 metodos
@@ -73,7 +93,7 @@ class RecSys:
         if splitAttribute:
             newItems = self._splitAttribute(newItems, splitAttribute)
         icr = gl.item_content_recommender.create(newItems, 'item_id', self._ratings, 'user_id', target='rating')
-        recs = icr.recommend(users=newUsers, new_observation_data=newObservationData).join(self._items, on='item_id').sort('rank')
+        recs = icr.recommend(users=newUsers, new_observation_data=newObservationData, k=10).join(self._items, on='item_id').sort('rank')
         print 'Recomendacoes por conteudo com base completa'
         print(recs)
 
@@ -94,9 +114,9 @@ class RecSys:
             print 'RMSE'
             print(evalRMSE)
 
-        if newUsers and newObservationData:
-            route = Route(recs['latitude'], recs['longitude'])
-            route.map()
+        if newUsers:
+            route = Route(recs['latitude'], recs['longitude'], recs['name'])
+            route.map(newUsers[0])
 
     # Se o item tiver o atributo especificado multivalorado, o item será duplicado
     def _splitAttribute(self, items, attribute):

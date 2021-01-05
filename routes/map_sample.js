@@ -13,7 +13,7 @@ function initMap() {
     directionsDisplay,
     latLngWaypoints
   );
-  document.getElementById("mode").addEventListener("change", function() {
+  document.getElementById("mode").addEventListener("change", function () {
     calculateAndDisplayRoute(
       directionsService,
       directionsDisplay,
@@ -37,8 +37,9 @@ function calculateAndDisplayRoute(
       travelMode: google.maps.TravelMode[selectedMode],
       optimizeWaypoints: true,
     },
-    function(response, status) {
+    function (response, status) {
       if (status == "OK") {
+        console.log(response)
         directionsDisplay.setDirections(response);
       } else {
         window.alert("Directions request failed due to " + status);
@@ -50,7 +51,7 @@ function calculateAndDisplayRoute(
 // Formata wayPoints gerados via recomendacao
 function getLatLng() {
   var list = [];
-  window.waypoints.forEach(function(element) {
+  window.waypoints.forEach(function (element) {
     loc = { location: new google.maps.LatLng(element.lat, element.lng) };
     list.push(loc);
   });
